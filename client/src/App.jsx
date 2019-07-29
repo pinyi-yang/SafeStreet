@@ -11,11 +11,17 @@ class App extends React.Component {
       token: '',
       user: null,
       errorMessage: '',
-      apiData: null
+      apiData: null,
+      address: '',
+      crime: null,
+      disaster: null,
+      air: null
     }
     this.checkForLocalToken = this.checkForLocalToken.bind(this);
     this.liftToken = this.liftToken.bind(this);
     this.logout = this.logout.bind(this);
+    this.handleAddressChange = this.handleAddressChange.bind(this);
+    this.handleSearchSubmit = this.handleSearchSubmit.bind(this);
   }
 
   checkForLocalToken() {
@@ -70,6 +76,21 @@ class App extends React.Component {
     })
   }
 
+  handleAddressChange(e) {
+    this.setState({
+      address: e.target.value
+    })
+  }
+
+  handleSearchSubmit(e) {
+    e.preventDefault()
+    this.setState({
+      crime: `crime in ${this.state.address}`,
+      disaster: `disaster in ${this.state.address}`,
+      air: `air quality in ${this.state.address}`
+    })
+  }
+
   componentDidMount() {
     this.checkForLocalToken();
   }
@@ -98,7 +119,17 @@ class App extends React.Component {
       );
     }
     return (
-      contents
+      <>
+        {contents}
+        <form onSubmit={this.handleSearchSubmit}>
+          <input type='text' placeholder='City Name' value={this.state.address} onChange={this.handleAddressChange}/> {' '}
+          <input type='submit' value='SEARCH' />
+        </form>
+        <div className='crime'>{this.state.crime}</div>
+        <div className='disaster'>{this.state.disaster}</div>
+        <div className='air'>{this.state.air}</div>
+
+      </>
     );
   }
 }
