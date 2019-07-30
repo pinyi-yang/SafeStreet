@@ -1,5 +1,6 @@
 import React from 'react';
 import axios from 'axios';
+import {BrowserRouter as Router, Link} from 'react-router-dom'
 
 
 class Signup extends React.Component {
@@ -38,6 +39,7 @@ class Signup extends React.Component {
       } else {
         localStorage.setItem('mernToken', res.data.token);
         this.props.liftToken(res.data);
+        this.props.history.push('/');
       }
     }).catch(err => {
       this.setState({
@@ -52,11 +54,18 @@ class Signup extends React.Component {
       <div className='Signup'>
         <h3>Create a new account</h3>
         <form onSubmit={this.handleSubmit}>
-          <input onChange={this.handleInputChange} type='text' value={this.state.name} name='name' placeholder='Enter your name here'/><br/>
-          <input onChange={this.handleInputChange} type='text' value={this.state.email} name='email' placeholder='Enter your email here'/><br/>
-          <input onChange={this.handleInputChange} type='password' value={this.state.password} name='password' placeholder='Enter your password here'/><br/>
+          Name: <br/>
+          <input onChange={this.handleInputChange} type='text' value={this.state.name} name='name' placeholder='Enter your name here'/><br/><br/>
+          Email: <br/>
+          <input onChange={this.handleInputChange} type='text' value={this.state.email} name='email' placeholder='Enter your email here'/><br/><br/>
+          Password: <br/>
+          <input onChange={this.handleInputChange} type='password' value={this.state.password} name='password' placeholder='Enter your password here'/><br/><br/>
           <input type='submit' value='Signup' />
-        </form> 
+        </form>
+        <>
+          <Link to='/signup' >Signup</Link> | {' '}
+          <Link to='/login'>Login</Link>
+        </>
       </div>
     );
   }

@@ -1,5 +1,6 @@
 import React from 'react';
 import axios from 'axios';
+import {BrowserRouter as Router, Link} from 'react-router-dom'
 
 class Login extends React.Component {
   constructor(props) {
@@ -40,6 +41,7 @@ class Login extends React.Component {
       } else {
         localStorage.setItem('mernToken', res.data.token);
         this.props.liftToken(res.data);
+        this.props.history.push('/')
       }
     }).catch((err) => {
       console.log('login error is ', err);
@@ -72,6 +74,10 @@ class Login extends React.Component {
                 <br/><br/>
         <input type='submit' value='Login' />
       </form>
+      <>
+        <Link to='/signup' >Signup</Link> | {' '}
+        <Link to='/login'>Login</Link>
+      </>
     </div>
     );
   }
