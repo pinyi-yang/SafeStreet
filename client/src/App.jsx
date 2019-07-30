@@ -3,6 +3,19 @@ import './App.css';
 import axios from 'axios';
 import Login from './Login';
 import Signup from './Signup';
+import Results from './Results';
+import Details from './Details';
+import Home from './Home';
+import moment from 'moment';
+import {
+  BrowserRouter as Router,
+  Route,
+  Link,
+  Redirect
+} from 'react-router-dom';
+// import {createBrowserHistory} from 'history'
+// import {createHashHistory} from 'history';
+// const history = createBrowserHistory();
 
 class App extends React.Component {
   constructor(props) {
@@ -11,17 +24,25 @@ class App extends React.Component {
       token: '',
       user: null,
       errorMessage: '',
-      apiData: null,
       address: '',
+      addressInfo: {
+        center: [],
+        neighborhood: '',
+        zipcode: '',
+        city: '',
+        state: ''
+      },
       crime: null,
-      disaster: null,
-      air: null
+      disasters: null,
+      air: null,
+      showResults: false
     }
     this.checkForLocalToken = this.checkForLocalToken.bind(this);
     this.liftToken = this.liftToken.bind(this);
     this.logout = this.logout.bind(this);
     this.handleAddressChange = this.handleAddressChange.bind(this);
     this.handleSearchSubmit = this.handleSearchSubmit.bind(this);
+    this.handleRootLink = this.handleRootLink.bind(this);
   }
 
   checkForLocalToken() {
@@ -83,11 +104,35 @@ class App extends React.Component {
   }
 
   handleSearchSubmit(e) {
-    e.preventDefault()
+    e.preventDefault();
+    axios.defaults.headers.common['Authorization'] = 'Bearer ' + localStorage.getItem('mernToken');
+    console.log('go to backend for data');
+    axios.get(`/api/address?address=${this.state.address}`).then(response => {
+      console.log('get data from backend', response.data);
+      this.setState({
+        addressInfo: response.data,
+        crime: `crime in ${this.state.address}`,
+        disaster: `disaster in ${this.state.address}`,
+        air: `air quality in ${this.state.address}`
+      })
+
+      axios.get(`/api/disasters?state=${this.state.addressInfo.state}&zipcode=${this.state.addressInfo.zipcode}`).then(response => {
+        let disastersSummary = response.data;
+        console.log('diasters are ', disastersSummary);
+        this.setState({
+          disasters: disastersSummary
+        });
+        this.setState({
+          showResults: true
+        })
+      })
+
+    })
+  }
+
+  handleRootLink() {
     this.setState({
-      crime: `crime in ${this.state.address}`,
-      disaster: `disaster in ${this.state.address}`,
-      air: `air quality in ${this.state.address}`
+      showResults: false
     })
   }
 
@@ -97,39 +142,80 @@ class App extends React.Component {
 
   render() {
     var user = this.state.user;
-    var contents;
+    var contents = (
+      <Route exact path='/' render={() => (
+        <>
+          <Link to='/signup' >
+            <div className="btn-div">
+              Signup
+            </div>
+          </Link>
+          <Link to='/login'>
+            <div className="btn-div">
+              Login
+            </div>
+          </Link>
+        </>
+      )} />
+    );
+
+    if (this.state.disasters) {
+      var disastersRender = [<h3>Total Disasters: {this.state.disasters.total}</h3>];
+      for (let key in this.state.disasters) {
+        if (key !='total') {
+          let name = key.toString();
+          console.log(key);
+          disastersRender.push(<p>{name}: {this.state.disasters[key]}</p>)
+        }
+      }
+    }
+
     if (user) {
       //have a user
-      console.log(user);
-      contents = (
-        <>
-          <p>Hello, {user.name}</p>
-          <p onClick={this.logout}>Logout</p>
-        </>
-      );
-    } else {
-      //if no user
-      contents = (
-        <>
-          <p>Please login</p>
-          <Login liftToken = {this.liftToken} />
-          <p>or signup</p>
-          <Signup liftToken = {this.liftToken} />
-        </>
-      );
+      if (!this.state.showResults) {
+        contents = (
+          <Route exact path='/' render={(props) => (
+            <>
+              <p>Hello, {user.name}</p>
+              <p onClick={this.logout}>Logout</p>
+              <form onSubmit={this.handleSearchSubmit}>
+                <input type='text' placeholder='City Name' value={this.state.address} onChange={this.handleAddressChange}/> {' '}
+                <input type='submit' value='SEARCH' />
+              </form>
+            </> 
+          )}/>
+        );
+      } else {
+        contents = (
+          <Route exact path='/' render={(props) => (
+            <Redirect to='/results' />
+            )}
+          />
+        )
+      }
     }
-    return (
-      <>
-        {contents}
-        <form onSubmit={this.handleSearchSubmit}>
-          <input type='text' placeholder='City Name' value={this.state.address} onChange={this.handleAddressChange}/> {' '}
-          <input type='submit' value='SEARCH' />
-        </form>
-        <div className='crime'>{this.state.crime}</div>
-        <div className='disaster'>{this.state.disaster}</div>
-        <div className='air'>{this.state.air}</div>
 
-      </>
+    return (
+      <div style={{backgroundImage: 'url(./iphone8_frame.png)'}} className='phone'>
+        <div className='phone-frame'>
+          <Router>
+            {contents}
+            {/* <Route exact path='/' render = {(props) => (contents)} /> */}
+            <Route exact path='/login' render={(props) => (<Login {...props} liftToken = {this.liftToken} />)} />
+            <Route exact path='/signup' render={(props) => (<Signup {...props} liftToken = {this.liftToken} />)} />
+            <Route exact path='/results' render={() => (<Results 
+              neighborhood={this.state.addressInfo.neighborhood} 
+              address={this.state.address}
+              disasters={this.state.disasters}
+              handleRootLink={this.handleRootLink}/>)} />
+            <Route path='/results/:name' render={(props) => (<Details
+              {...props} 
+              disasters={this.state.disasters}
+              />)} 
+            />
+          </Router>
+        </div>
+      </div>
     );
   }
 }
