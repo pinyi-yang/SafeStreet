@@ -17,7 +17,7 @@ const Details = props => {
       <Link to='/results'>◀️ back</Link>
       <div className='details-score'>
         <h2>
-          {data.score}
+          {data.rank}
         </h2>
       </div>
       <div className='details-individual-container'>

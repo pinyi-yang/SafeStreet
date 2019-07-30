@@ -1,11 +1,10 @@
 * {
-  border: black solid 0.3px;
+  font-family: 'Montserrat', sans-serif;
 }
 
 .phone {
   background-size: contain;
   background-repeat: no-repeat;
-  border:black solid 1px;
   width: 900px;
   height: 960px;
   margin: auto;
@@ -16,5 +15,25 @@
   width: 375px;
   height: 667px;
   margin: 140px 264px auto auto;
-  border: black solid 1px;
+  top: 140px;
+}
+
+/* Here is for result page ===========================================*/
+.result-div {
+  border: white solid 0.1px;
+}
+
+.back-tab {
+  height: 50px;
+  margin-top: 30px;
+}
+
+.back-img {
+  height: 40px;
+}
+
+.location-banner {
+  height: 128px;
+  width: 100%;
+  background-color: #84D581;
 }
