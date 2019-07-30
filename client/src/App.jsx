@@ -4,12 +4,14 @@ import axios from 'axios';
 import Login from './Login';
 import Signup from './Signup';
 import Results from './Results';
+import Details from './Details';
 import Home from './Home';
 import moment from 'moment';
 import {
   BrowserRouter as Router,
   Route,
-  Link
+  Link,
+  Redirect
 } from 'react-router-dom';
 // import {createBrowserHistory} from 'history'
 // import {createHashHistory} from 'history';
@@ -33,12 +35,14 @@ class App extends React.Component {
       crime: null,
       disasters: null,
       air: null,
+      showResults: false
     }
     this.checkForLocalToken = this.checkForLocalToken.bind(this);
     this.liftToken = this.liftToken.bind(this);
     this.logout = this.logout.bind(this);
     this.handleAddressChange = this.handleAddressChange.bind(this);
     this.handleSearchSubmit = this.handleSearchSubmit.bind(this);
+    this.handleRootLink = this.handleRootLink.bind(this);
   }
 
   checkForLocalToken() {
@@ -118,12 +122,18 @@ class App extends React.Component {
         this.setState({
           disasters: disastersSummary
         });
-        // <Redirect to='/results' />
-        this.props.history.push('/results');
+        this.setState({
+          showResults: true
+        })
       })
 
     })
+  }
 
+  handleRootLink() {
+    this.setState({
+      showResults: false
+    })
   }
 
   componentDidMount() {
@@ -162,18 +172,27 @@ class App extends React.Component {
 
     if (user) {
       //have a user
-      contents = (
-        <Route exact path='/Home' render={(props) => (
-          <>
-            <p>Hello, {user.name}</p>
-            <p onClick={this.logout}>Logout</p>
-            <form onSubmit={this.handleSearchSubmit}>
-              <input type='text' placeholder='City Name' value={this.state.address} onChange={this.handleAddressChange}/> {' '}
-              <input type='submit' value='SEARCH' />
-            </form>
-          </> 
-        )}/>
-      );
+      if (!this.state.showResults) {
+        contents = (
+          <Route exact path='/' render={(props) => (
+            <>
+              <p>Hello, {user.name}</p>
+              <p onClick={this.logout}>Logout</p>
+              <form onSubmit={this.handleSearchSubmit}>
+                <input type='text' placeholder='City Name' value={this.state.address} onChange={this.handleAddressChange}/> {' '}
+                <input type='submit' value='SEARCH' />
+              </form>
+            </> 
+          )}/>
+        );
+      } else {
+        contents = (
+          <Route exact path='/' render={(props) => (
+            <Redirect to='/results' />
+            )}
+          />
+        )
+      }
     }
 
     return (
@@ -186,7 +205,14 @@ class App extends React.Component {
             <Route exact path='/signup' render={(props) => (<Signup {...props} liftToken = {this.liftToken} />)} />
             <Route exact path='/results' render={() => (<Results 
               neighborhood={this.state.addressInfo.neighborhood} 
-              address={this.state.address}/>)} />
+              address={this.state.address}
+              disasters={this.state.disasters}
+              handleRootLink={this.handleRootLink}/>)} />
+            <Route path='/results/:name' render={(props) => (<Details
+              {...props} 
+              disasters={this.state.disasters}
+              />)} 
+            />
           </Router>
         </div>
       </div>
