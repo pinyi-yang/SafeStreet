@@ -111,21 +111,30 @@ class App extends React.Component {
       console.log('get data from backend', response.data);
       this.setState({
         addressInfo: response.data,
-        crime: `crime in ${this.state.address}`,
-        disaster: `disaster in ${this.state.address}`,
-        air: `air quality in ${this.state.address}`
       })
-
       axios.get(`/api/disasters?state=${this.state.addressInfo.state}&zipcode=${this.state.addressInfo.zipcode}`).then(response => {
         let disastersSummary = response.data;
         console.log('diasters are ', disastersSummary);
         this.setState({
           disasters: disastersSummary
         });
+      })
+
+      axios.get(`/api/airquality?city=${this.state.addressInfo.city}`).then(response => {
+        console.log('get air quality response', response.data);
         this.setState({
+          air: response.data
+        })
+      })
+
+      axios.get(`/api/crime?neighborhood=${this.state.addressInfo.neighborhood}`).then(response => {
+        console.log('get crime records, ', response.data);
+        this.setState({
+          crime: response.data,
           showResults: true
         })
       })
+
 
     })
   }
@@ -144,18 +153,7 @@ class App extends React.Component {
     var user = this.state.user;
     var contents = (
       <Route exact path='/' render={() => (
-        <>
-          <Link to='/signup' >
-            <div className="btn-div">
-              Signup
-            </div>
-          </Link>
-          <Link to='/login'>
-            <div className="btn-div">
-              Login
-            </div>
-          </Link>
-        </>
+        <Redirect to='/login' />
       )} />
     );
 
@@ -175,14 +173,14 @@ class App extends React.Component {
       if (!this.state.showResults) {
         contents = (
           <Route exact path='/' render={(props) => (
-            <>
+            <div className='search-page'>
               <p>Hello, {user.name}</p>
               <p onClick={this.logout}>Logout</p>
               <form onSubmit={this.handleSearchSubmit}>
                 <input type='text' placeholder='City Name' value={this.state.address} onChange={this.handleAddressChange}/> {' '}
                 <input type='submit' value='SEARCH' />
               </form>
-            </> 
+            </div> 
           )}/>
         );
       } else {
@@ -206,11 +204,15 @@ class App extends React.Component {
             <Route exact path='/results' render={() => (<Results 
               neighborhood={this.state.addressInfo.neighborhood} 
               address={this.state.address}
-              disasters={this.state.disasters}
+              disasters={this.state.disasters} 
+              crime={this.state.crime}
+              air={this.state.air}
               handleRootLink={this.handleRootLink}/>)} />
             <Route path='/results/:name' render={(props) => (<Details
               {...props} 
               disasters={this.state.disasters}
+              crime={this.state.crime}
+              air={this.state.air}
               />)} 
             />
           </Router>

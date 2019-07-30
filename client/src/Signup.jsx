@@ -52,15 +52,14 @@ class Signup extends React.Component {
   render() {
     return (
       <div className='Signup'>
-        <h3>Create a new account</h3>
+        <h1 className="appName">SafeStreeet</h1>
+        <h5>Create a new account</h5>
         <form onSubmit={this.handleSubmit}>
-          Name: <br/>
-          <input onChange={this.handleInputChange} type='text' value={this.state.name} name='name' placeholder='Enter your name here'/><br/><br/>
-          Email: <br/>
-          <input onChange={this.handleInputChange} type='text' value={this.state.email} name='email' placeholder='Enter your email here'/><br/><br/>
-          Password: <br/>
-          <input onChange={this.handleInputChange} type='password' value={this.state.password} name='password' placeholder='Enter your password here'/><br/><br/>
-          <input type='submit' value='Signup' />
+         
+          <input className="signUpInput" onChange={this.handleInputChange} type='text' value={this.state.name} name='name' placeholder='Enter your name here'/><br/><br/>
+          <input className="signUpInput" onChange={this.handleInputChange} type='text' value={this.state.email} name='email' placeholder='Enter your email here'/><br/><br/>
+          <input className="signUpInput" onChange={this.handleInputChange} type='password' value={this.state.password} name='password' placeholder='Enter your password here'/><br/><br/>
+          <input className="submitBtn" type='submit' value='Signup' />
         </form>
         <>
           <Link to='/signup' >Signup</Link> | {' '}
