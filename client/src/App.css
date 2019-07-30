@@ -70,7 +70,7 @@
 
 .back-tab {
   height: 50px;
-  margin-top: 30px;
+  margin-top: 10px;
 }
 
 .back-img {
@@ -81,4 +81,151 @@
   height: 128px;
   width: 100%;
   background-color: #84D581;
+  text-align: center;
+  font-size: 37px;
+  line-height: 120px;
+  color:white;
+}
+
+.result-mainscore {
+  position: relative;
+  height: 180px;
+  width: 100%;
+  text-align: center;
+  font-size: 100px;
+  font-weight: 700;
+  line-height: 174px;
+  margin-top: 15px;
+  margin-bottom: -15px;
+}
+
+.result-mainscore-subtitle {
+  position: absolute;
+  height: 29px;
+  width: 200px;
+  color: #4A4A4A;
+  font-size: 24px;
+  font-weight: 200;
+  line-height: 29px;
+  text-align: center;
+  top: 0;
+  left: 90px;
+}
+
+.result-sub {
+  height: 80px;
+  width: 335px;
+  margin: auto;
+  border-radius: 20px;
+  background-color: #84D581;
+  margin-top: 15px;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  box-sizing: border-box;
+  padding: 0 1em;
+}
+
+.nondec-Link {
+  text-decoration: none;
+}
+
+.result-sub-info {
+  color: #FFF;
+  font-size: 29px;
+  font-weight: 600;
+  line-height: 35px;
+  text-align: center;
+}
+
+.result-sub-score {
+  color: #4A4A4A;
+  font-size: 35px;
+  font-weight: 800;
+  line-height: 35px;
+  text-align: center;
+}
+
+/* ROy's css ======================================= */
+.search-page {
+  border: white solid 0.5px;
+}
+
+.check-score {
+  width: 303px;
+  color: #000;
+  font-size: 16px;
+  line-height: 32px;
+  text-align: center;
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  margin-bottom: 20px;
+}
+
+
+.safe-street {
+  height: 44px;
+  width: 186px;
+  color: #000;
+  font-size: 36px;
+  line-height: 44px;
+  text-align: center;
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  margin-top:20px;
+}
+
+.submit-btn {
+  height: 53px;
+  width: 333px;
+  border-radius: 20px;
+  background-color: #84D581;
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  color: #000;
+  font-size: 20px;
+  line-height: 24px;
+  margin-top: 30px;
+}
+
+.input {
+  box-sizing: border-box;
+  height: 53px;
+  width: 333px;
+  border-radius: 20px;
+  background-color: #FFF;
+  border: 1px solid #808080;
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  color: #7B7B7B;
+  font-size: 20px;
+  line-height: 24px;
+  text-align: center;
+  margin-top: 30px;
+}
+
+.house-img {
+  margin-left: 15px;
+  margin-top: 100px;
+  width: 350px;
+}
+
+
+.name {
+  color: #7B7B7B;
+  font-size: 20px;
+  line-height: 24px;
+  text-align: left;
+}
+
+.logout {
+  color: #7B7B7B;
+  font-size: 20px;
+  line-height: 24px;
+  text-align: right;
 }

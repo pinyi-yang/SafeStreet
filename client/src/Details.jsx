@@ -13,8 +13,12 @@ const Details = props => {
     )
   }
   return (
-    <>
-      <Link to='/results'>◀️ back</Link>
+    <div className='result-div'>
+      <Link to='/results'>
+        <div className='back-tab'>
+          <img src='../back.png' className='back-img' alt='back'/>
+        </div>
+      </Link>
       <div className='details-score'>
         <h2>
           {data.rank}
@@ -23,7 +27,7 @@ const Details = props => {
       <div className='details-individual-container'>
         {detailsIndividuals}
       </div>
-    </>
+    </div>
   )
 }
 
