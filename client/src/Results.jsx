@@ -105,21 +105,26 @@ const Results = props => {
   } else {
     content = (
       <>
-        <p>Cheking {props.neighborhood} neghborhood of {props.address}</p>
-        <h1>{overallRank}</h1>
-        <Link to='/results/crime'>
+        <div className='location-banner'>{props.neighborhood}</div>
+        <div className='result-mainscore'>
+          {overallRank}
+          <div className='result-mainscore-subtitle'>
+            Overall Rank
+          </div>
+        </div>
+        <Link to='/results/crime' className='nondec-Link'>
           <div className='crime-div result-sub'>
               {crimeContent}
           </div>
         </Link>
         
-        <Link to='/results/disasters'>
+        <Link to='/results/disasters' className='nondec-Link'>
           <div className='disaster result-sub'>
             {disastersContent}
           </div>
         </Link>
         
-        <Link to='/results/air'>
+        <Link to='/results/air' className='nondec-Link'>
           <div className='air result-sub'>
               {airContent}
           </div>

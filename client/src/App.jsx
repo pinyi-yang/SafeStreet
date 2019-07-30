@@ -174,13 +174,16 @@ class App extends React.Component {
         contents = (
           <Route exact path='/' render={(props) => (
             <div className='search-page'>
-              <p>Hello, {user.name}</p>
-              <p onClick={this.logout}>Logout</p>
+              {/* <div className='name'> Hello, {user.name}!</div> */}
+              <div className='safe-street'>SafeStreet</div>
+              <div className='check-score'>{user.name}, where would you like to check SafetyScore®?</div>
               <form onSubmit={this.handleSearchSubmit}>
-                <input type='text' placeholder='City Name' value={this.state.address} onChange={this.handleAddressChange}/> {' '}
-                <input type='submit' value='SEARCH' />
+                <input className='input' type='text' placeholder='enter address' value={this.state.address} onChange={this.handleAddressChange}/> {' '}
+                <input className='submit-btn' type='submit' value='submit' />
               </form>
-            </div> 
+              <img className='house-img' src='houses.png'/>
+              {/* <div className='logout' onClick={this.logout}>Logout</div> */}
+            </div>
           )}/>
         );
       } else {
