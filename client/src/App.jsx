@@ -163,7 +163,7 @@ class App extends React.Component {
     if (user) {
       //have a user
       contents = (
-        <Route exact path='/' render={() => (
+        <Route exact path='/Home' render={(props) => (
           <>
             <p>Hello, {user.name}</p>
             <p onClick={this.logout}>Logout</p>
