@@ -153,18 +153,7 @@ class App extends React.Component {
     var user = this.state.user;
     var contents = (
       <Route exact path='/' render={() => (
-        <div className='landing-page'>
-          <Link to='/signup' >
-            <div className="btn-div">
-              Signup
-            </div>
-          </Link>
-          <Link to='/login'>
-            <div className="btn-div">
-              Login
-            </div>
-          </Link>
-        </div>
+        <Redirect to='/login' />
       )} />
     );
 

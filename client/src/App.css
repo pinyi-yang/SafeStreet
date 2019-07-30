@@ -18,6 +18,51 @@
   top: 140px;
 }
 
+/* Here is for login and signup =======================================*/
+.Signup,.Login{
+  text-align: center;
+}
+
+.signUpInput{
+  /* margin:5px 0 5px; */
+  border-radius:30px;
+  padding: 10px;
+  width: 80%;
+  outline: none;
+  -webkit-border-radius:30px;
+  -moz-border-radius:30px;
+  -ms-border-radius:30px;
+  -o-border-radius:30px;
+}
+
+.loginInput{
+  margin: 10px 0 10px;
+  border-radius:30px;
+  padding: 10px;
+  width: 80%;
+  outline: none;
+  -webkit-border-radius:30px;
+  -moz-border-radius:30px;
+  -ms-border-radius:30px;
+  -o-border-radius:30px;
+}
+
+.appName{
+  padding: 100px 0 40px;
+  text-align: center;
+}
+.submitBtn{
+  padding:10px 70px 10px 70px;
+  margin: 0 auto;
+  width: 80%;
+  background-color:#84D581;
+  border-radius: 30px;
+  -webkit-border-radius: 30px;
+  -moz-border-radius: 30px;
+  -ms-border-radius: 30px;
+  -o-border-radius: 30px;
+}
+
 /* Here is for result page ===========================================*/
 .result-div {
   border: white solid 0.1px;

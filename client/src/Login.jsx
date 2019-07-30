@@ -55,31 +55,32 @@ class Login extends React.Component {
   render() {
 
     return (
-    <div className="Login">
-      <h3>Login into your account:</h3>
-      <form onSubmit={this.handleSubmit}>
-        Email: <br/>
-        <input onChange={this.handleEmailChange} 
-                value = {this.state.email} 
-                type ='email' 
-                name = 'email' 
-                placeholder = 'Enter your email' />
-                <br/><br/>
-        Password: <br/>
-        <input onChange={this.handlePasswordChange}
-                value = {this.state.password}
-                type='password'
-                name='password'
-                placehoder='Enter your password' />
-                <br/><br/>
-        <input type='submit' value='Login' />
-      </form>
-      <>
-        <Link to='/signup' >Signup</Link> | {' '}
-        <Link to='/login'>Login</Link>
-      </>
-    </div>
-    );
+      <div className="Login">
+        <h1 className="appName">SafeStreeet</h1>
+        <h5>Login to see SaftyScore:</h5>
+        <form onSubmit={this.handleSubmit}>
+          <div >
+              <input className="loginInput"  onChange={this.handleEmailChange} 
+                      value = {this.state.email} 
+                      type ='email' 
+                      name = 'email' 
+                      placeholder = 'Email' />
+                  
+          </div>
+          <input className="loginInput" onChange={this.handlePasswordChange}
+                  value = {this.state.password}
+                  type='password'
+                  name='password'
+                  placeholder ='Password' />
+                  <br/><br/>
+          <input className="submitBtn" type='submit' value='Login' />
+        </form>
+        <>
+          <Link to='/signup' >Signup</Link> | {' '}
+          <Link  to='/login'>Login</Link>
+        </>
+      </div>
+      );
   }
 }
 
