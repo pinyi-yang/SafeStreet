@@ -29,10 +29,6 @@ router.get('/address', (req, res) => {
     }
     console.log(result);
     res.json(result)
-      // let results = response.body.features.map(function(feature) {
-      //     return feature.center 
-      // })
-      // res.render('map', {results});
 })
 })
 

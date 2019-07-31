@@ -117,7 +117,10 @@
 .back-img {
   height: 40px;
 }
-
+.result-loading {
+  margin: auto;
+  text-align: center;
+}
 .location-banner {
   height: 128px;
   width: 100%;
@@ -152,7 +155,13 @@
   top: 0;
   left: 90px;
 }
+.marker {
+  font-size: 35px
+}
 
+.map-popup {
+  font-size: 16px;
+}
 .result-sub {
   height: 80px;
   width: 335px;
