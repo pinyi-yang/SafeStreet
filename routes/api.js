@@ -45,11 +45,12 @@ router.get('/disasters', (req, res) => {
     let disastersSummary = {
                               total: 0,
                               score: 0,
+                              unit: 'instances',
                               rank: '',
                               details: {
                                 Fire: 0,
                                 Flood: 0,
-                                'Mud/Landslide': 0,
+                                'Landslide': 0,
                                 Earthquake: 0,
                                 Tornado: 0,
                                 Hurricane: 0
@@ -58,13 +59,12 @@ router.get('/disasters', (req, res) => {
     disasters.forEach(disaster => {
       if (disaster.placeCode === req.query.zipcode) {
         console.log(disaster.incidentType);
-        if (disastersSummary['details'][disaster.incidentType]) {
-          disastersSummary['details'][disaster.incidentType]++;
-          disastersSummary['total']++;
+        if (disastersSummary['details'][disaster.incidentType]==='Mud/Landslide') {
+          disastersSummary['details']['Landslide']++;
         } else {
-          disastersSummary['details'][disaster.incidentType] = 1;
-          disastersSummary['total']++;
+          disastersSummary['details'][disaster.incidentType]++;
         }
+        disastersSummary['total']++;
       }
     })
     
@@ -92,8 +92,7 @@ router.get('/disasters', (req, res) => {
 router.get('/airquality', (req, res) => {
   let city = req.query.city;
   console.log('get air quality for', city)
-  const api_key='96298018a036fd8a07f5e2dc464e98adc3eaadb3';
-  const url = `https://api.waqi.info/feed/${city}/?token=${api_key}`
+  const url = `https://api.waqi.info/feed/${city}/?token=${process.env.AIR_QUALITY_KEY}`
   axios.get(url).then(result => { 
       let airResponse = result.data
       let aqi = airResponse.data.aqi;
@@ -117,8 +116,15 @@ router.get('/airquality', (req, res) => {
       let air = {
         total: airResponse.data.aqi,
         rank,
+        unit: 'AQI',
         score: airResponse.data.aqi/100,
-        details
+        details: {
+          CO: details.co,
+          NO2: details.no2,
+          O3: details.o3,
+          SO2: details.so2,
+          'PM2.5': details.pm25
+        }
         }
     console.log(air);
     res.json(air);
@@ -137,6 +143,7 @@ router.get('/crime', (req, res) => {
     let crimeData = {
       total: 0,
       rank: '',
+      unit: 'instances',
       score: 0,
       details: {
         Theft: 0,

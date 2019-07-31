@@ -209,7 +209,6 @@ class App extends React.Component {
         )
       }
     }
-
     return (
       <div style={{backgroundImage: 'url(./iphone8_frame.png)'}} className='phone'>
         <div className='phone-frame'>

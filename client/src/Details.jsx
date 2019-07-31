@@ -15,7 +15,7 @@ const Details = props => {
           <div className="details-individual-num">
             {data.details[key]}
           </div>
-          <div className="details-individual-unit">instances</div>
+          <div className="details-individual-unit">{data.unit}</div>
         </div>
       </div>
     )
