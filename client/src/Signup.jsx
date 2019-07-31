@@ -53,7 +53,7 @@ class Signup extends React.Component {
     return (
       <div className='Signup'>
         <h1 className="appName">SafeStreeet</h1>
-        <h5>Create a new account</h5>
+        <h3>Create a new account</h3>
         <form onSubmit={this.handleSubmit}>
          
           <input className="signUpInput" onChange={this.handleInputChange} type='text' value={this.state.name} name='name' placeholder='Enter your name here'/><br/><br/>
@@ -61,6 +61,7 @@ class Signup extends React.Component {
           <input className="signUpInput" onChange={this.handleInputChange} type='password' value={this.state.password} name='password' placeholder='Enter your password here'/><br/><br/>
           <input className="submitBtn" type='submit' value='Signup' />
         </form>
+        <br/>
         <>
           <Link to='/signup' >Signup</Link> | {' '}
           <Link to='/login'>Login</Link>

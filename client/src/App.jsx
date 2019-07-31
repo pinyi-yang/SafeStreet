@@ -153,7 +153,21 @@ class App extends React.Component {
     var user = this.state.user;
     var contents = (
       <Route exact path='/' render={() => (
-        <Redirect to='/login' />
+        <div className='landing-page'>
+          <div className='landing-title'>SafeStreet</div>
+          <Link to='/signup' className="landingLink">
+            <div className="landingBtn">
+              Signup
+            </div>
+          </Link>
+
+          <Link  to='/login' className="landingLink">
+            <div className="landingBtn">
+              Login
+            </div>
+          </Link>
+          <img className='house-img' src='houses.png'/>
+        </div>
       )} />
     );
 
@@ -182,7 +196,7 @@ class App extends React.Component {
                 <input className='submit-btn' type='submit' value='submit' />
               </form>
               <img className='house-img' src='houses.png'/>
-              {/* <div className='logout' onClick={this.logout}>Logout</div> */}
+              <div className='logout' onClick={this.logout}>Logout</div>
             </div>
           )}/>
         );
@@ -212,7 +226,8 @@ class App extends React.Component {
               air={this.state.air}
               handleRootLink={this.handleRootLink}/>)} />
             <Route path='/results/:name' render={(props) => (<Details
-              {...props} 
+              {...props}
+              neighborhood={this.state.addressInfo.neighborhood} 
               disasters={this.state.disasters}
               crime={this.state.crime}
               air={this.state.air}
