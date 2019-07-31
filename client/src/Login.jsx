@@ -56,8 +56,8 @@ class Login extends React.Component {
 
     return (
       <div className="Login">
-        <h1 className="appName">SafeStreeet</h1>
-        <h5>Login to see SaftyScore:</h5>
+        <div className="appName">SafeStreet</div>
+        <h3>Login to see SaftyScore:</h3>
         <form onSubmit={this.handleSubmit}>
           <div >
               <input className="loginInput"  onChange={this.handleEmailChange} 
@@ -75,6 +75,7 @@ class Login extends React.Component {
                   <br/><br/>
           <input className="submitBtn" type='submit' value='Login' />
         </form>
+        <br/>
         <>
           <Link to='/signup' >Signup</Link> | {' '}
           <Link  to='/login'>Login</Link>

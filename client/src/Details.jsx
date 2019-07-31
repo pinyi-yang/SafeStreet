@@ -8,7 +8,15 @@ const Details = props => {
   for (let key in data.details) {
     detailsIndividuals.push(
       <div className='details-individual'>
-        {key}: {data.details[key]}
+        <div className="details-individual-title">
+          {key}
+        </div>
+        <div className="details-individual-info">
+          <div className="details-individual-num">
+            {data.details[key]}
+          </div>
+          <div className="details-individual-unit">{data.unit}</div>
+        </div>
       </div>
     )
   }
@@ -19,13 +27,13 @@ const Details = props => {
           <img src='../back.png' className='back-img' alt='back'/>
         </div>
       </Link>
-      <div className='details-score'>
-        <h2>
-          {data.rank}
-        </h2>
-      </div>
+      <div className='location-banner'>{props.neighborhood}</div>
       <div className='details-individual-container'>
-        {detailsIndividuals}
+        <div className='details-deco-div'></div>
+        <div className='details-title'>Average of Last Year</div>
+        <div className="details-individual-wrapper">
+          {detailsIndividuals}
+        </div>
       </div>
     </div>
   )

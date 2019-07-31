@@ -5,8 +5,7 @@ import Login from './Login';
 import Signup from './Signup';
 import Results from './Results';
 import Details from './Details';
-import Home from './Home';
-import moment from 'moment';
+import Map from './Map';
 import {
   BrowserRouter as Router,
   Route,
@@ -153,7 +152,21 @@ class App extends React.Component {
     var user = this.state.user;
     var contents = (
       <Route exact path='/' render={() => (
-        <Redirect to='/login' />
+        <div className='landing-page'>
+          <div className='landing-title'>SafeStreet</div>
+          <Link to='/signup' className="landingLink">
+            <div className="landingBtn">
+              Signup
+            </div>
+          </Link>
+
+          <Link  to='/login' className="landingLink">
+            <div className="landingBtn">
+              Login
+            </div>
+          </Link>
+          <img className='house-img' src='houses.png'/>
+        </div>
       )} />
     );
 
@@ -178,11 +191,11 @@ class App extends React.Component {
               <div className='safe-street'>SafeStreet</div>
               <div className='check-score'>{user.name}, where would you like to check SafetyScore®?</div>
               <form onSubmit={this.handleSearchSubmit}>
-                <input className='input' type='text' placeholder='enter address' value={this.state.address} onChange={this.handleAddressChange}/> {' '}
+                <input className='input' type='text' placeholder='123th St., City' value={this.state.address} onChange={this.handleAddressChange}/> {' '}
                 <input className='submit-btn' type='submit' value='submit' />
               </form>
               <img className='house-img' src='houses.png'/>
-              {/* <div className='logout' onClick={this.logout}>Logout</div> */}
+              <div className='logout' onClick={this.logout}>Logout</div>
             </div>
           )}/>
         );
@@ -195,7 +208,6 @@ class App extends React.Component {
         )
       }
     }
-
     return (
       <div style={{backgroundImage: 'url(./iphone8_frame.png)'}} className='phone'>
         <div className='phone-frame'>
@@ -204,20 +216,27 @@ class App extends React.Component {
             {/* <Route exact path='/' render = {(props) => (contents)} /> */}
             <Route exact path='/login' render={(props) => (<Login {...props} liftToken = {this.liftToken} />)} />
             <Route exact path='/signup' render={(props) => (<Signup {...props} liftToken = {this.liftToken} />)} />
+            <Route exact path='/map' render={() => (<Map
+              center={this.state.addressInfo.center}
+              />)} 
+            />
             <Route exact path='/results' render={() => (<Results 
               neighborhood={this.state.addressInfo.neighborhood} 
               address={this.state.address}
               disasters={this.state.disasters} 
               crime={this.state.crime}
               air={this.state.air}
+              center={this.state.addressInfo.center}
               handleRootLink={this.handleRootLink}/>)} />
             <Route path='/results/:name' render={(props) => (<Details
-              {...props} 
+              {...props}
+              neighborhood={this.state.addressInfo.neighborhood} 
               disasters={this.state.disasters}
               crime={this.state.crime}
               air={this.state.air}
               />)} 
             />
+            
           </Router>
         </div>
       </div>
