@@ -1,6 +1,6 @@
 
 # Safe Street
-**[Live Demo](https://fierce-dusk-30649.herokuapp.com/)**
+**[Live Demo](https://safe-street.herokuapp.com/)**
 
 Safe Street is a mobile end app prototype to help house buyer, renter or visitor know a neighborhood in a fast and comprehensive way. It provides info regarding air quality, security and disaster risk in the neighborhood searched by user.
 
