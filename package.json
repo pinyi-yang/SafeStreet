@@ -1,7 +1,7 @@
 {
-  "name": "jwt-auth-boilerplate",
+  "name": "SafeStreet",
   "version": "1.0.0",
-  "description": "JWT Authentication Example with React",
+  "description": "Apps help you know your neighborhood better",
   "main": "server.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",

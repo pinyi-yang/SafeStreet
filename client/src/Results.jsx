@@ -41,7 +41,7 @@ class Results extends React.Component {
             Disaster Risk:  
           </div> 
           <div className='result-sub-score'>
-            <img src='loading.gif' className='result-loading' alt='Loading'/>
+            NA
           </div>
         </>
       )
@@ -66,7 +66,7 @@ class Results extends React.Component {
             Security:  
           </div> 
           <div className='result-sub-score'>
-            <img src='loading.gif' className='result-loading' alt='Loading'/>
+            NA  
           </div>
         </>
       )
@@ -91,7 +91,7 @@ class Results extends React.Component {
             Air Quality:   
           </div> 
           <div className='result-sub-score'>
-            <img src='loading.gif' className='result-loading' alt='Loading'/>
+            NA
           </div>
         </>
       )
